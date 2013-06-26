@@ -1,0 +1,13 @@
+{
+  "name": "webrtc",
+  "description": "WebRTC LNUG",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.x",
+    "coffee-script": "1.6.x",
+    "jade": "",
+    "stylus": "",
+    "connect-assets": ""
+  }
+}

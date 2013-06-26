@@ -1,0 +1,190 @@
+extend layout
+block content
+  .reveal
+    .slides
+      section
+        h1 WebRTC
+        img(src='/images/webrtc.png', width='300px', height='300px')
+        p
+          small
+            a(href='http://github.com/malditogeek') Mauro Pompilio
+        small LNUG June 2013
+      section
+        img(src='/images/m.png', width='250px')
+        h2 Mauro Pompilio
+        p 
+          i twitter.com/malditogeek
+        p 
+          i github.com/malditogeek
+      section
+        h1 What is WebRTC?
+        small From webrtc.org
+        blockquote
+          "Our mission: To enable rich, high quality, RTC applications to be developed in the browser via simple Javascript APIs and HTML5."
+      section
+        h2 Think about Skype/Hangouts...
+        p Proprietary walled gardens
+        p Native apps / plugins
+        p Lack of APIs for integration
+        p ...
+      section
+        h1 WebRTC!
+        img(src='/images/webrtc.png', width='300px', height='300px')
+      section
+        h2 WebRTC everywhere (almost)
+        ul
+          li Chrome
+          li Chrome for Android
+          li Firefox Beta / Aurora
+          li Java and Objective-C bindings
+      section
+        h2 Access to input devices
+        h2 Communicate to a remote peer
+        h2 Send also arbitrary data
+      section
+        h1 Javascript APIs
+      section
+        h1 MediaStream
+        h1 RTCPeerConnection
+        h1 RTCDataChannel
+      section
+        h1 MediaStream
+        p Source of sync'd audio and/or video
+        p constraints for video (resolution, etc)
+        pre
+          code(data-trim).javascript
+            | var constraints = {video: true};
+            | 
+            | function successCallback(stream) {
+            |   var video = document.querySelector("video");
+            |   video.src = window.URL.createObjectURL(stream);
+            | }
+            | 
+            | function errorCallback(error) {
+            |   console.log("navigator.getUserMedia error: ", error); 
+            | }
+            | 
+            | navigator.getUserMedia(constraints, successCallback, errorCallback);
+      section
+        h1 RTCPeerConnection
+        p Hides A LOT of complexity
+        ul
+          li Signal processing
+          li 
+            Codecs selection
+            ul
+              li Audio: Opus
+              li Video: VP8
+          li P2P 
+          li Security
+          li Bandwith Management
+      section
+        pre
+          code
+            | pc = new RTCPeerConnection(null);
+            | pc.onaddstream = gotRemoteStream;
+            | pc.addStream(localStream);
+            | pc.createOffer(gotOffer);
+      section
+        h1 RTCDataChannel
+        ul
+          li Low latency (games, state, etc)
+          li Reliable or Unreliable 
+          li Secure (DTLS)
+          li WebSockets API
+      section
+        h1 Signaling
+        p Reaching a remote peer
+        p SessionDescriptions
+        p Abstract transport XHR/WebSockets/XMPP
+      section
+        img(src='/images/signaling.png').white
+      section
+        p 
+          i But you still need to route traffic from peer to peer
+        p
+          i ...
+        p
+          i and you're probably behind NAT.
+      section
+        h1 ICE
+        p
+          small
+            i Interactive Connectivity Establishment
+        p Framework for connecting peers
+        p Part of WebRTC
+        p Tries ICE candidates in parallel
+      section
+        h1 STUN / TURN
+        p STUN: 
+          i Session Traversal Utilities for NAT
+        p TURN: 
+          i Traversal Using Relays around NAT
+      section
+        img(src='/images/stun.png').white
+      section
+        img(src='/images/STUNandTURN.png').white
+      section
+        h1 Note on security
+        p P2P traffic is AES encrypted
+        p Media: SRTP
+        p Data: DTLS (S-DES on Chrome)
+        p Make sure you use HTTPS for signaling
+      section
+        h1 DEMO!
+      section
+        h1 VMUX
+        ul
+          li SocketStream (LNUG May 2012)
+          li Backbone.js
+          li github.com/malditogeek/vmux
+      section
+        h1 Building apps
+      section
+        h2 apprtc
+        p
+          a(href='https://apprtc.appspot.com') https://apprtc.appspot.com
+        h2 adapter.js polyfill
+        p 
+          a(href='https://apprtc.appspot.com/js/adapter.js') https://apprtc.appspot.com/js/adapter.js
+        h2 Public STUN server
+        p stun.l.google.com:19302
+      section
+        h2 chrome://webrtc-internals
+      section
+        h1 Libraries
+      section
+        h2 SimpleWebRTC
+        p 
+          a(href='https://github.com/henrikjoreteg/SimpleWebRTC') https://github.com/henrikjoreteg/SimpleWebRTC
+        p 
+          a(href='https://talky.io/') https://talky.io/ 
+        h2 PeerJS
+        p 
+          a(href='https://github.com/peers/peerjs') https://github.com/peers/peerjs
+        p 
+          a(href='http://peerjs.com/') http://peerjs.com/
+      section
+        h2 PeerCDN
+        p 
+          a(href='https://peercdn.com/') https://peercdn.com/
+        h2 ShareFest
+        p 
+          a(href='http://www.sharefest.me/') http://www.sharefest.me/
+        h2 Hacks
+        p 
+          a(href='https://github.com/muaz-khan/WebRTC-Experiment') https://github.com/muaz-khan/WebRTC-Experiment
+      section
+        h1 Resources
+        ul
+          li 
+            a(href='http://webrtc.org') webrtc.org
+          li 
+            a(href='https://groups.google.com/forum/#!forum/discuss-webrtc') discuss-webrtc Google Group
+          li
+            a(href='https://twitter.com/webrtc') @webrtc
+          li 
+            a(href='https://groups.google.com/forum/#!forum/discuss-webrtc') HTML5Rocks 
+      section
+        h1 Thanks!
+        i Questions?
